@@ -1,4 +1,5 @@
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:wisata_candi/models/candi.dart';
 
@@ -9,7 +10,8 @@ class DetailScreen extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      body: Column(
+      body: SingleChildScrollView(
+      child: Column(
         children: [
           Stack(
             children: [
@@ -98,7 +100,44 @@ class DetailScreen extends StatelessWidget{
                   fontSize: 16, fontWeight: FontWeight.bold,
                 ),),
                 SizedBox(height: 10,),
-                SizedBox(),
+                SizedBox(
+                  height: 100,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: candi.imageUrls.length,
+                    itemBuilder: (context, index){
+                      return Padding(padding: EdgeInsets.only(left: 8),
+                      child: GestureDetector(
+                        onTap: () {},
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(
+                            color: Colors.deepPurple.shade100,
+                            width: 2,
+                          )
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                        child: CachedNetworkImage(
+                          imageUrl: candi.imageUrls[index],
+                          width: 120,
+                          height: 120,
+                          fit: BoxFit.cover,
+                          placeholder: (context, url) => Container(
+                            width: 120,
+                            height: 120,
+                            color: Colors.deepPurple[50],
+                          ),
+                          errorWidget: (context, url, error) => Icon(Icons.error),
+                          )
+                        ),
+                      ),
+                      ),
+                      );
+                    },
+                  ),
+                ),
                 SizedBox(height: 4,),
                 Text('Tap untuk memperbesar', style: TextStyle(
                   fontSize: 12,color: Colors.black54,
@@ -107,6 +146,7 @@ class DetailScreen extends StatelessWidget{
             ),
           )
         ],
+      ),
       ),
     );
   }
