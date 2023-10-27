@@ -42,7 +42,8 @@ class DetailScreen extends StatelessWidget{
               ),)
             ],
           ),
-          Padding(padding: const EdgeInsets.symmetric(horizontal: 16),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -89,7 +90,8 @@ class DetailScreen extends StatelessWidget{
             Divider(color: Colors.deepPurple.shade100,),
             SizedBox(height: 16,)
           ]
-          ),),
+          ),
+          ),
           Padding(
             padding: const EdgeInsets.all(15),
             child: Column(
