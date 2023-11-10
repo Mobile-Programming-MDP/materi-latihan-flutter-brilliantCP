@@ -33,9 +33,11 @@ final TextEditingController _searchController = TextEditingController();
           ),
           child: const TextField(
             autofocus: false, 
+            //TODO 6 Implementasi fitur pencarian
             decoration: InputDecoration(
               hintText: 'Cari Candi...',
               prefixIcon: Icon(Icons.search),
+              //TODO 7 Implementasi pengosongan input
               border: InputBorder.none,
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.deepPurple),
@@ -51,6 +53,7 @@ final TextEditingController _searchController = TextEditingController();
           itemCount: _filteredCandis.length,
           itemBuilder: (context, index) {
             final candi = _filteredCandis[index];
+            //TODO 8 Implementasi GestureDetector dan Hero animation
             return Card(
               margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
               child: Row(
