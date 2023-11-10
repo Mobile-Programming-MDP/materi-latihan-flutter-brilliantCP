@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
         )
        ),
        colorScheme: 
+        
         ColorScheme.fromSeed(seedColor: Colors.deepPurple).copyWith(
           primary: Colors.deepPurple,
           surface: Colors.deepPurple[50],

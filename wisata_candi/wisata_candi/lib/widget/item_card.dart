@@ -11,6 +11,7 @@ class ItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+     
       //TODO 2 Tetapkan parameter shape, margin, dan elevation dari Cari
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       margin: EdgeInsets.all(4),
