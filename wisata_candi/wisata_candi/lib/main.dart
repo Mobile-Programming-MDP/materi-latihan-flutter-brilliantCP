@@ -75,20 +75,20 @@ final List<Widget> _children = [
               _currentindex = index;
             });
           },
-          items: [
-            const BottomNavigationBarItem(
+          items: const[
+            BottomNavigationBarItem(
               icon: Icon(Icons.home, color: Colors.deepPurple,),
               label: 'Home',
             ),
-            const BottomNavigationBarItem(
+            BottomNavigationBarItem(
               icon: Icon(Icons.search, color: Colors.deepPurple,),
               label: 'Search',
             ),
-            const BottomNavigationBarItem(
+            BottomNavigationBarItem(
               icon: Icon(Icons.favorite, color: Colors.deepPurple,),
               label: 'Favorite',
             ),
-            const BottomNavigationBarItem(
+            BottomNavigationBarItem(
               icon: Icon(Icons.person, color: Colors.deepPurple,),
               label: 'Profile',
             ),
