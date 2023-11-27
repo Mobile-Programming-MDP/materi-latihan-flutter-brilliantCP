@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wisata_candi/screens/sign_in.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -17,10 +18,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool _obscurePassword = true;
 
   //TODO: 1 membuat fungsi _signUp
-  void _signUp() {
+  void _signUp() async{
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
     final String name = _nameController.text.trim();
     final String username = _usernameController.text.trim();
     final String password = _passwordController.text.trim();
+    
+    
 
     if (password.length < 8 ||
         !password.contains(RegExp(r'[A-Z]')) ||
@@ -35,11 +39,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
       setState(() {
         _errorText = "";
       });
-    }
+    } 
+    //simpan data pengguna pada sharedPreferences
+    prefs.setString('fullname', name);
+    prefs.setString('username', username);
+    prefs.setString('password', password);
 
-    print('* Sign Up berhasil! ');
-    print('Nama Pengguna: $username');
-    print('Password: $password');
+
+    //buat navigasi ke SignInScreen
+    Navigator.pushNamed(context, '/signin');
   }
 
   //TODO: 2 membuat fungsi dispose
