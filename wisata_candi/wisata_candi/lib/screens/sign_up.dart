@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wisata_candi/screens/sign_in.dart';
+import 'package:encrypt/encrypt.dart' as encrypt;
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -18,13 +19,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool _obscurePassword = true;
 
   //TODO: 1 membuat fungsi _signUp
-  void _signUp() async{
+  void _signUp() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final String name = _nameController.text.trim();
     final String username = _usernameController.text.trim();
     final String password = _passwordController.text.trim();
-    
-    
 
     if (password.length < 8 ||
         !password.contains(RegExp(r'[A-Z]')) ||
@@ -39,12 +38,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
       setState(() {
         _errorText = "";
       });
-    } 
-    //simpan data pengguna pada sharedPreferences
-    prefs.setString('fullname', name);
-    prefs.setString('username', username);
-    prefs.setString('password', password);
+    }
 
+    //TODO 3 Jika name, username, pw tidak kosong lakukan enkripsi
+    if (name.isNotEmpty && username.isNotEmpty && password.isNotEmpty) {
+      final encrypt.Key key = encrypt.Key.fromLength(32);
+      final iv = encrypt.IV.fromLength(16);
+
+      final encrypter = encrypt.Encrypter(encrypt.AES(key));
+      final encryptedName = encrypter.encrypt(name, iv: iv);
+      final encryptedUsername = encrypter.encrypt(username, iv: iv);
+      final encryptedPassword = encrypter.encrypt(password, iv: iv);
+
+      prefs.setString('fullname', encryptedName.base64);
+      prefs.setString('username', encryptedUsername.base64);
+      prefs.setString('password', encryptedPassword.base64);
+      prefs.setString('key', key.base64);
+      prefs.setString('iv', iv.base64);
+    }
+    //simpan data pengguna pada sharedPreferences
 
     //buat navigasi ke SignInScreen
     Navigator.pushNamed(context, '/signin');
